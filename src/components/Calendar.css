@@ -5,7 +5,7 @@
   margin: 0;
 }
 
-.calendar-table .calendar-month {
+.calendar-table, .calendar-month {
   table-layout: fixed;
   border-spacing: 0;
   border-collapse: collapse;
@@ -30,7 +30,7 @@
 
 input{
   width: 90px !important;
-  font-size: 1.5rem !important;
+  font-size: 1.9rem !important;
   color: #f7f1f1;
   padding: 0 10px !important;
 }
@@ -48,6 +48,14 @@ input{
   color: #fff;
   font-weight: 700;
 }
+
+.daySlot:active{
+  background: #10685f;
+  color: #fff;
+  font-weight: 700;
+}
+
+
 
 .weekday {
   border-radius: 0;

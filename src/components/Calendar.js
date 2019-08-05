@@ -29,9 +29,6 @@ class Calendar extends Component {
     daysInMonth = () => {
       return this.state.dateObject.daysInMonth();
     }   
-    currentDate = () => {
-      return this.state.dateObject.get("date");
-    }
     currentDay = () => {
       return this.state.dateObject.format("D");
     }
@@ -180,13 +177,13 @@ class Calendar extends Component {
     let getDays = [];
     for (let d = 1; d<= this.daysInMonth(); d++) {
       let currentDay = (d == this.currentDay() ? "today" : "");
+
       getDays.push(
         <td key={d} className={`daySlot center ${currentDay}`}>
           {d}
         </td>
       );
-    
-  }
+    }
 
     var totalSlots = [...blanks, ...getDays];
     let rows = [];
