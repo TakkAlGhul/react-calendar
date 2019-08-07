@@ -39,23 +39,21 @@ input{
   cursor: pointer;
 }
 
-.daySlot, .emptySlot{
+.calendar-day, .emptySlot{
   border: 1px solid #f7f1f1;
 }
 
-.daySlot:hover, .emptySlothover{
+.calendar-day:hover, .emptySlothover{
   background: #badfdb;
   color: #fff;
   font-weight: 700;
 }
 
-.daySlot:active{
+.calendar-day:active{
   background: #10685f;
   color: #fff;
   font-weight: 700;
 }
-
-
 
 .weekday {
   border-radius: 0;
