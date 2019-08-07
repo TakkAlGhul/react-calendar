@@ -3,17 +3,23 @@ import moment from 'moment';
 import './Calendar.css'
 
 class Calendar extends Component {
-  state = {
-    dateObject: moment(),
-    today: moment(),
-    showMonthList: false,
-    showYearSelect: false
-  }
   constructor(props) {
     super(props);
     this.width = props.width || "350px";
     this.style = props.style || {};
     }
+  
+    state = {
+    dateObject: moment(),
+    today: moment(),
+    selectedDay: moment(),
+    selectedMonth: moment(),
+    selectedYear: moment(),
+    showEvent: false,
+    showMonthList: false,
+    showYearSelect: false
+    };
+  
     
     weekdays = moment.weekdays();
     weekdaysShort= moment.weekdaysShort();  
@@ -158,6 +164,16 @@ class Calendar extends Component {
           </div>
       )
     };
+
+    handleDayClick = (e, d) => {
+      this.setState({
+        selectedDay: d,
+        selectedMonth: this.month(),
+        selectedYear: this.year(),
+        showEvent: true
+      });
+    }
+    
     
   render() {
     let weekdays = this.weekdaysShort.map((day) => {
@@ -172,24 +188,26 @@ class Calendar extends Component {
         {""}
         </td>
       );
-    }
+    };
 
     let getDays = [];
     for (let d = 1; d<= this.daysInMonth(); d++) {
       let currentDay = (d == this.currentDay() ? "today" : "");
 
       getDays.push(
-        <td key={d} className={`daySlot center ${currentDay}`}>
+        <td key={d} className={`calendar-day center ${currentDay}`} onClick={(e) => {
+          this.handleDayClick(e, d);
+          }}>
           {d}
         </td>
       );
-    }
+    };
 
-    var totalSlots = [...blanks, ...getDays];
+    var totalDays = [...blanks, ...getDays];
     let rows = [];
     let cells = [];
 
-    totalSlots.forEach((row, i) => {
+    totalDays.forEach((row, i) => {
       if (i % 7 !== 0) {
         cells.push(row);
       }else {
@@ -197,7 +215,7 @@ class Calendar extends Component {
         cells = [];
         cells.push(row);
       }
-      if (i === totalSlots.length - 1) {
+      if (i === totalDays.length - 1) {
         rows.push(cells);
       }
     })
@@ -212,7 +230,7 @@ class Calendar extends Component {
           <thead className="calendar-header #004d40 teal darken-1">
             <tr className="white-text">
               <td colSpan="7" className="month-name">
-                <span onClick={e => {
+                <span onClick={(e) => {
                   this.onPrev();
                   }}
                   className="calendar-button button-prev far fa-arrow-alt-circle-left" />
@@ -224,7 +242,7 @@ class Calendar extends Component {
                   {this.state.showMonthList && <this.monthList data={moment.months()} />}  
                 </div>
                 <this.YearSelector />
-                <span onClick={e => {
+                <span onClick={(e) => {
                 this.onNext();
                 }}
                 className="calendar-button button-next far fa-arrow-alt-circle-right" />
