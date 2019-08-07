@@ -5,7 +5,7 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper green" >
-          <a href="/" className="brand-logo center">React Calendar App</a>
+          <a href="/" className="brand-logo center">Simple Calendar</a>
         </div>
       </nav>
     )
