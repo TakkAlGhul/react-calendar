@@ -12,10 +12,6 @@ class Calendar extends Component {
     state = {
     dateObject: moment(),
     today: moment(),
-    selectedDay: moment(),
-    selectedMonth: moment(),
-    selectedYear: moment(),
-    showEvent: false,
     showMonthList: false,
     showYearSelect: false
     };
@@ -165,16 +161,7 @@ class Calendar extends Component {
       )
     };
 
-    handleDayClick = (e, d) => {
-      this.setState({
-        selectedDay: d,
-        selectedMonth: this.month(),
-        selectedYear: this.year(),
-        showEvent: true
-      });
-    }
-    
-    
+
   render() {
     let weekdays = this.weekdaysShort.map((day) => {
       return (
@@ -195,9 +182,7 @@ class Calendar extends Component {
       let currentDay = (d == this.currentDay() ? "today" : "");
 
       getDays.push(
-        <td key={d} className={`calendar-day center ${currentDay}`} onClick={(e) => {
-          this.handleDayClick(e, d);
-          }}>
+        <td key={d} className={`calendar-day center ${currentDay}`} >
           {d}
         </td>
       );
@@ -234,7 +219,7 @@ class Calendar extends Component {
                   this.onPrev();
                   }}
                   className="calendar-button button-prev far fa-arrow-alt-circle-left" />
-                <div className="month-title" onClick={e => {this.appendMonthList();}}>
+                <div className="month-title" onClick={(e) => {this.appendMonthList();}}>
                   {this.month()}
                   <span>
                     <i className="fa fa-chevron-down down-list"></i>
